@@ -1,3 +1,8 @@
+2021-04-20  v0.0.4
+--------------------
+* Compatibility with Rails 6
+* Update to Discount resource
+
 2020-11-27  v0.0.3
 --------------------
 * Fix HTTP requests so that they're thread-safe
