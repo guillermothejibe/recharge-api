@@ -246,18 +246,43 @@ class2 "Recharge", JSON.parse(<<-END) do
      "address":"https://request.in/foo",
      "topic":"order/create"
   },
-  "address":{
-    "id":3411137,
-    "address1":"1933 Manning",
+  "address": {
+    "id":21317826,   
+    "address1":"1776 Washington Street",
     "address2":"204",
-    "city":"los angeles",
+    "cart_attributes": [
+      {
+        "name": "custom name",
+        "value": "custom value"
+      }
+    ],
+    "cart_note":"Note",
+    "city":"Los Angeles",
+    "company":"ReCharge",
+    "country":"United States",
+    "created_at":"2018-11-14T09:00:01",
+    "customer_id":18819267,
+    "discount_id":12345676,
+    "first_name":"John",
+    "last_name":"Doe",
+    "note_attributes": [
+      {
+        "name":"custom name",
+        "value":"custom value"
+      }
+    ],
+    "original_shipping_lines": [
+      {
+        "code":"Standard Shipping",
+        "price":"0.00",
+        "title":"Standard Shipping"
+      }
+    ],    
+    "phone":"5551234567",
     "province":"California",
-    "first_name":"mike",
-    "last_name":"flynn",
-    "zip":"90025",
-    "company":"bootstrap",
-    "phone":"3103103101",
-    "country":"United States"
+    "shipping_lines_override":null,
+    "updated_at":"2018-11-14T09:00:01",
+    "zip":"90404"
   },
   "discount":{
     "id": 3748296,
@@ -353,6 +378,17 @@ module Recharge
     def self.validate(data)
       POST(join("validate"), data)
     end
+
+    def self.apply_discount(id, discount_id)
+      id_required!(id)
+      instance(POST(join(id, "apply_discount"), :discount_id => discount_id))
+    end
+
+    def self.remove_discount(id)
+      id_required!(id)
+      instance(POST(join(id, "remove_discount")))
+    end
+
   end
 
   class Customer
